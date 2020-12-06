@@ -1,0 +1,6 @@
+while(i > 0)
+begin
+    a = a + 2;
+    b = b - a;
+    i = i - 1;
+end

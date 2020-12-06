@@ -1,0 +1,113 @@
+The following context-free grammar has been used for performing syntax analysis on palindromeCorrect.c, i.e. C program for checking whether a given string is an odd length palindrome or not.
+
+
+program -> declaration_list
+
+declaration_list -> declaration D
+
+D -> declaration_list | ε
+
+declaration -> variable_declaration | function_declaration
+
+variable_declaration -> type_specifier variable_declaration_list ;
+
+variable_declaration_list -> variable_declaration_list , variable_declaration_identifier | variable_declaration_identifier
+
+variable_declaration_identifier -> identifier vdi | array_identifier vdi	
+
+vdi -> identifier_array_type | assignment_operator simple_expression
+
+identifier_array_type -> [ initilization_params | ε
+
+initilization_params -> integer_constant ] initilization | ] string_initilization
+
+initilization -> string_initilization | array_initialization | ε
+
+type_specifier -> INT | CHAR | FLOAT  | DOUBLE | LONG long_grammar | SHORT short_grammar | UNSIGNED unsigned_grammar | SIGNED signed_grammar | VOID
+
+unsigned_grammar -> INT | LONG long_grammar | SHORT short_grammar | ε
+
+signed_grammar -> INT | LONG long_grammar | SHORT short_grammar | ε
+
+long_grammar -> INT | ε
+
+short_grammar -> INT | ε
+
+function_declaration -> function_declaration_type function_declaration_param_statement
+
+function_declaration_type -> type_specifier identifier (
+
+function_declaration_param_statement -> params ) statement
+
+params -> parameters_list | ε
+
+parameters_list -> type_specifier parameters_identifier_list
+
+parameters_identifier_list -> param_identifier parameters_identifier_list_breakup
+
+parameters_identifier_list_breakup -> , parameters_list | ε
+
+param_identifier -> identifier param_identifier_breakup
+
+param_identifier_breakup -> [ ] | ε
+
+statement -> expression_statment | compound_statement | conditional_statements | iterative_statements | return_statement | break_statement | variable_declaration
+
+compound_statement -> { statment_list }
+
+statment_list -> statement statment_list | ε
+
+expression_statment -> expression ; | ;
+
+conditional_statements -> IF ( simple_expression ) statement conditional_statements_breakup
+
+conditional_statements_breakup -> ELSE statement | ε
+
+iterative_statements -> WHILE ( simple_expression ) statement | FOR ( expression ; simple_expression ; expression ) | DO statement WHILE ( simple_expression ) ;
+return_statement -> RETURN ; | RETURN expression ;
+
+break_statement -> BREAK ;
+
+string_initilization -> assignment_operator string_constant
+
+array_initialization -> assignment_operator { array_int_declarations }
+
+array_int_declarations -> integer_constant array_int_declarations_breakup
+
+array_int_declarations_breakup -> , array_int_declarations | ε
+
+expression -> mutable assignment_operator expression | mutable addition_assignment_operator expression | mutable subtraction_assignment_operator expression | mutable multiplication_assignment_operator expression | mutable division_assignment_operator expression | mutable modulo_assignment_operator expression | mutable increment_operator | mutable decrement_operator | simple_expression
+
+simple_expression -> simple_expression OR_operator and_expression | and_expression
+
+and_expression -> and_expression AND_operator unary_relation_expression |unary_relation_expression
+
+unary_relation_expression -> exclamation_operator unary_relation_expression | regular_expression
+
+regular_expression -> regular_expression relational_operators sum_expression | sum_expression
+			
+relational_operators -> greaterthan_assignment_operator | lessthan_assignment_operator | greaterthan_operator | lessthan_operator | equality_operator | inequality_operator
+
+sum_expression -> sum_expression sum_operators term | term
+
+sum_operators -> add_operator | subtract_operator
+
+term -> term MULOP factor | factor
+
+MULOP -> multiplication_operator | division_operator | modulo_operator
+
+factor -> immutable | mutable
+
+mutable -> identifier | array_identifier
+
+immutable -> ( expression ) | call | constant
+
+call -> identifier ( arguments )
+
+arguments -> arguments_list | ε
+
+arguments_list -> expression A
+
+A -> , expression A | ε
+
+constant -> integer_constant | string_constant | float_constant | character_constant

@@ -1,0 +1,1 @@
+Perform intermediate code generation, after successful semantic analysis, of a C program which states whether a string is a palindrome or not, and if it is, whether it is odd in length. Also show the output produced upon semantic analysis of versions of the C program which contain semantic errors.
